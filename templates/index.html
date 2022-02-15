@@ -1,0 +1,71 @@
+<!-- Create the index.html file for the Flask web app -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Word Friend</title>
+</head>
+<body>
+    <h1> Hello I am Mr Word</h1>
+    <!-- Create the form input for the user to enter a thesis statement for the essay they want GPT-3 to help write. -->
+    <!-- This page will be the home page for the Mr. Word Friend Flask web app.
+    This page will allow the user to see a front end that allows them to enter in all the information necessary for the post route to work. -->
+    <!-- There also needs to be a place for people to enter in reference materials for the model to use as an example -->
+    <form action="/post" method="POST">
+        <!-- Create the html for the POST route in the app.py file -->
+        <!-- Users will be able to enter information and then send it to the post route with the submit button. -->
+        <label for="thesis">Thesis Statement:</label>
+        <textarea name="thesis" id="thesis" cols="30" rows="10"></textarea>
+        <br>
+        <label for="reference">Reference Materials:</label>
+        <textarea name="reference" id="reference" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+
+
+    </form>
+
+    <!-- Create the area where the user can see the generated essay. -->
+    <h2>Your generated essay:</h2>
+    <p id="generated_essay"></p>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Create the javascript that will allow the user to see the generated essay. -->
+
+    <script>
+        // Create the POST route in the app.py file
+        $("form").submit(function(event) {
+            event.preventDefault();
+            // Create the POST route in the app.py file
+            $.ajax({
+                type: "POST",
+                url: "/post",
+                data: $(this).serialize(),
+                success: function(data) {
+                    // Create the POST route in the app.py file
+                    $("#generated_essay").text(data);
+                }
+            });
+        });
+    </script>
+
+    <!-- Create the footer for the page. -->
+    <footer>
+        <p>Created by: Brian Ross<a href="https://www.linkedin.com/in/brian-ross-7877b915b/">
+    
+    </footer>
+
+
+
+</body>
+</html>
+
+
+<!-- Create the POST route for the Flask web app. -->
+<!-- This route will take in the user's thesis statement and reference materials and use the GPT-3 model to generate a random essay. -->
+<!-- This route will also save the user's thesis statement and reference materials to the database. -->
+<!-- This route will also save the generated essay to the database. -->
+
+
